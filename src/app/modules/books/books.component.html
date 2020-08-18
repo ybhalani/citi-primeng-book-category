@@ -1,0 +1,80 @@
+<div class="container">
+  <h1 class="text-center text-muted p-2">Books</h1>
+  <div class="row">
+
+    <!-- begin: prime ng table -->
+    <p-table #table [columns]="columns" [reorderableColumns]="true" [value]="bookList" [paginator]="true" [rows]="10"
+      [rowsPerPageOptions]="[10,25,50,100]" [scrollable]="true" scrollHeight="calc(100vh - 340px)"
+      (sortFunction)="onSort($event)" [customSort]="true">
+
+      <!-- begin: caption template -->
+      <ng-template pTemplate="caption">
+        <div class="w-100 d-flex justify-content-end">
+          <div class="form-inline">
+            <label for="email">Filter By:</label>&nbsp;
+            <p-dropdown (onChange)="onFilterTypeChange();" size="30" [options]="filterTypes"
+              [(ngModel)]="selectedFilterType" filter="true"></p-dropdown>
+            &nbsp;&nbsp;
+            <input name="search" type="text" pInputText size="30" placeholder="Search" [(ngModel)]="filterText"
+              (input)="onSearch($event)" />
+            &nbsp;&nbsp;
+          </div>
+        </div>
+      </ng-template>
+      <!-- end: caption template -->
+
+      <!-- begin:col group template when scrollable = true -->
+      <ng-template pTemplate="colgroup" let-columns>
+        <colgroup>
+          <col *ngFor="let col of columns">
+        </colgroup>
+      </ng-template>
+      <!-- end: colgroup template -->
+
+      <!-- begin: header template -->
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+            {{col.header}}
+            <p-sortIcon [field]="col.field" ariaLabel="Activate to sort"
+              ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order">
+            </p-sortIcon>
+          </th>
+        </tr>
+      </ng-template>
+      <!-- end: header template -->
+
+      <!-- begin: body template-->
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr [pSelectableRow]="rowData">
+          <td *ngFor="let col of columns">
+            {{rowData[col.field]}}
+          </td>
+        </tr>
+      </ng-template>
+      <!-- end: body template-->
+
+      <!-- begin: summary for display total records -->
+      <ng-template pTemplate="summary">
+        <span *ngIf="table?.totalRecords">Showing {{table?.first + 1}} to <span
+            *ngIf="table?.totalRecords > (table?.first + table?.rows)">{{table?.first + table?.rows}}</span> <span
+            *ngIf="table?.totalRecords < (table?.first + table?.rows)">{{table?.totalRecords}}</span> of
+          {{table?.totalRecords}} books</span>
+      </ng-template>
+      <!-- end: summary for display total records -->
+
+      <!-- begin: empty message template -->
+      <ng-template pTemplate="emptymessage" let-columns>
+        <tr height="300" style="text-align:center;">
+          <td [attr.colspan]="columns.length">
+            No records found
+          </td>
+        </tr>
+      </ng-template>
+      <!-- begin: empty message template -->
+
+    </p-table>
+    <!-- end: prime ng table -->
+
+  </div>
+</div>

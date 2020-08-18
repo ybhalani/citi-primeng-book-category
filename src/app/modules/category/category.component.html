@@ -1,0 +1,25 @@
+<div class="container">
+  <h1 class="text-center text-muted p-4">Categories</h1>
+
+  <!-- begin: primeng message -->
+  <p-messages severity="info">
+    <ng-template pTemplate> <span class="custom-message"></span> </ng-template>
+  </p-messages>
+  <!-- end: primeng message -->
+
+  <!-- begin: prime ng category tree view -->
+  <div class="row">
+    <div class="col-sm-6">
+      <p-tree styleClass="tree-height" [propagateSelectionUp]="false" [propagateSelectionDown]="false"
+        [value]="categoryList" selectionMode="checkbox" [(selection)]="selectedCategories">
+      </p-tree>
+    </div>
+    <div class="col-sm-6">
+      <button type="button" class="btn btn-primary float-right" (click)="searchByCategory()">Search Books By
+        Category</button>
+      <h5>Selected Nodes:</h5>
+      <div *ngFor="let file of selectedCategories">{{file.label}} </div>
+    </div>
+  </div>
+  <!-- end: prime ng category tree view -->
+</div>

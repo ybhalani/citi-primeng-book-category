@@ -1,0 +1,21 @@
+<!-- begin: nav bar setup -->
+<nav class="navbar navbar-expand-lg navbar-light nav-bar-bg">
+  <a class="navbar-brand" href="javascript:void(0)">Book Demo</a>
+  <div class="navbar-collapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/category">Category <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/books">Books <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<!-- end: nav bar setup -->
+
+<!-- begin: routing setup -->
+<div class="container-fluid">
+  <router-outlet></router-outlet>
+</div>
+<!-- end: routing setup -->
